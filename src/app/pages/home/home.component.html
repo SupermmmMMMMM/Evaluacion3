@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Registro de Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="inicioForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="nombre" type="text"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="inicioForm.get('nombre')?.touched && inicioForm.get('nombre')?.errors?.['required']">
+      El nombre es requerido
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Correo electrónico</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="inicioForm.get('email')?.touched && inicioForm.get('email')?.errors?.['required']">
+      El correo es requerido
+    </ion-note>
+    <ion-note color="danger" *ngIf="inicioForm.get('email')?.touched && inicioForm.get('email')?.errors?.['email']">
+      El correo no es válido
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input formControlName="password" type="password"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="inicioForm.get('password')?.touched && inicioForm.get('password')?.errors?.['required']">
+      La contraseña es requerida
+    </ion-note>
+    <ion-note color="danger" *ngIf="inicioForm.get('password')?.touched && inicioForm.get('password')?.errors?.['minlength']">
+      La contraseña debe tener al menos 6 caracteres
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Rol</ion-label>
+      <ion-select formControlName="role">
+        <ion-select-option value="Vendedor">Vendedor</ion-select-option>
+        <ion-select-option value="Administrador">Administrador</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="!inicioForm.valid" class="ion-margin-top">
+      Registrarse
+    </ion-button>
+
+    <ion-button expand="block" fill="clear" routerLink="/login">
+      ¿Ya tienes cuenta? Inicia sesión
+    </ion-button>
+  </form>
+</ion-content>
