@@ -34,9 +34,20 @@ export class LoginComponent {
 
       try {
         const { email, password } = this.loginForm.value;
-        await this.authService.login(email, password);
-        await loading.dismiss();
-        this.router.navigate(['/home']);  // Redirige a la página principal después de un login exitoso
+        await this.authService.login(email, password);  // Llama al servicio de autenticación para iniciar sesión
+
+        // Una vez logueado, obtenemos el rol del usuario
+        this.authService.getUserRole().subscribe(async (role) => {
+          await loading.dismiss();  // Desactiva el cargador
+
+          // Redirigir dependiendo del rol
+          if (role === 'Vendedor') {
+            this.router.navigate(['/vendedor']);  // Redirige al componente Vendedor
+          } else {
+            this.router.navigate(['/login']);  // Redirige al componente de inicio si no es vendedor
+          }
+        });
+
       } catch (error: any) {
         await loading.dismiss();
         const alert = await this.alertController.create({

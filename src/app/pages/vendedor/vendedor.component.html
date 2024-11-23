@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Vendedor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="ventaForm" (ngSubmit)="registrarVenta()">
+    <ion-item>
+      <ion-label position="floating">Monto de la venta</ion-label>
+      <ion-input type="number" formControlName="monto" required></ion-input>
+    </ion-item>
+
+    <div *ngIf="ventaForm.controls['monto'].invalid && ventaForm.controls['monto'].touched">
+      <ion-text color="danger">
+        <p>El monto es obligatorio y debe ser mayor a 0.</p>
+      </ion-text>
+    </div>
+
+    <ion-button expand="full" type="submit" [disabled]="ventaForm.invalid">
+      Ingresar venta
+    </ion-button>
+  </form>
+
+</ion-content>
