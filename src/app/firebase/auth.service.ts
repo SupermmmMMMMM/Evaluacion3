@@ -32,6 +32,29 @@ export class AuthService {
     });
   }
 
+  async updateUserProfile(userData: Partial<User>): Promise<void> {
+    try {
+      const userId = await this.getUserId();
+      if (!userId) throw new Error('No hay usuario autenticado');
+
+      await this.firestore.doc(`users/${userId}`).update({
+        nombre: userData.nombre,
+        telefono: userData.telefono,
+        direccion: userData.direccion
+      });
+      
+      // Actualizar el estado del usuario
+      const currentUser = this.userState.value;
+      if (currentUser) {
+        this.userState.next({
+          ...currentUser,
+          ...userData
+        });
+      }
+    } catch (error: any) {
+      throw this.handleError(error);
+    }
+  }
   // Método para obtener el estado del usuario
   getUserState(): Observable<User | null> {
     return this.user$;
@@ -103,14 +126,15 @@ export class AuthService {
   // Método para hacer logout
   async logout(): Promise<void> {
     try {
+      await this.afAuth.setPersistence('none');  // Limpiar la persistencia antes de cerrar sesión
       await this.afAuth.signOut();
       this.userState.next(null);
-      this.router.navigate(['/auth/login']);
+      await this.router.navigate(['/login']);
+      window.location.reload();  // Esto asegura que la página se recargue
     } catch (error) {
-      throw this.handleError(error);
+      console.error('Error al cerrar sesión:', error);
     }
   }
-
   // Obtener los datos del usuario desde Firestore
   private getUserData(uid: string): Observable<User> {
     return this.firestore.doc(`users/${uid}`).valueChanges() as Observable<User>;

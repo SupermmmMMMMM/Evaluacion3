@@ -6,13 +6,13 @@
   
   ion-content {
     --background: var(--ion-color-primary);
-  
+    
     &::part(scroll) {
       padding: 20px;
     }
   }
   
-  .sales-container {
+  .profile-container {
     background: var(--background-transparency);
     border-radius: var(--border-radius);
     padding: var(--padding-container);
@@ -22,7 +22,8 @@
     position: relative;
   }
   
-  .sales-icon {
+  // Nuevo código para el ícono de perfil
+  .profile-icon {
     width: 80px;
     height: 80px;
     background: var(--ion-color-primary);
@@ -39,32 +40,8 @@
     }
   }
   
-  .total-sales-card {
-    background: transparent;
-    padding: 0;
-    margin-bottom: 24px;
-    text-align: center;
-  
-    ion-card-header {
-      padding: 0 0 8px 0;
-    }
-  
-    ion-card-title {
-      color: var(--ion-color-primary);
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-  
-    h2 {
-      color: var(--ion-color-primary);
-      font-size: 2rem;
-      margin: 0;
-      font-weight: bold;
-    }
-  }
-  
   form {
-    margin-bottom: 20px;
+    width: 100%;
   }
   
   ion-item {
@@ -72,9 +49,7 @@
     --border-color: var(--ion-color-primary);
     --border-radius: 4px;
     --padding-start: 0;
-    --highlight-height: 0;
     margin-bottom: 16px;
-    margin-top: 16px;
   
     &:last-child {
       margin-bottom: 0;
@@ -83,53 +58,30 @@
     ion-label {
       color: var(--ion-color-primary);
       font-weight: 500;
-      margin-bottom: 8px;
-      position: relative;
-      top: 0;
-      transform: none !important;
     }
   
     ion-input {
       --padding-start: 8px;
       --background: rgba(255, 255, 255, 0.5);
-      border: 1px solid var(--ion-color-primary);
       border-radius: 4px;
-      margin-top: 8px;
-      --padding-top: 8px;
-      --padding-bottom: 8px;
+      margin-top: 4px;
     }
   }
   
-  // Estilo específico para las etiquetas flotantes
-  ion-item.item-label-floating {
-    ion-label {
-      position: relative;
-      transform: none !important;
-    }
-  }
-  
-  ion-text {
+  ion-note {
+    color: var(--ion-color-danger);
+    font-size: 0.8rem;
+    margin: -12px 0 16px 0;
     display: block;
-    padding: 0 16px;
-    margin-top: -12px;
-    margin-bottom: 16px;
-  
-    p {
-      margin: 0;
-      font-size: 0.8rem;
-    }
+    padding-left: 16px;
   }
   
   ion-button {
-    margin: 8px 0;
+    margin: 24px 0 0 0;
     --border-radius: 6px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    
-    &[color="warning"] {
-      margin-top: 16px;
-    }
   }
   
   @media (max-width: 576px) {
@@ -137,7 +89,7 @@
       padding: 16px;
     }
   
-    .sales-container {
+    .profile-container {
       margin: 40px 10px 10px;
       padding: 16px;
     }

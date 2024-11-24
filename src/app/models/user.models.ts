@@ -4,6 +4,6 @@ export interface User {
   role: string;
   createdAt: Date;
   nombre: string;
-
-  // Puedes agregar más campos si es necesario
+  telefono?: string;  // Opcional
+  direccion?: string; // Opcional
 }

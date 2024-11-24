@@ -1,15 +1,39 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { Venta } from 'src/app/models/venta.models';
 import {  VentaSemanal } from 'src/app/models/venta-semanal.models'; // Importamos las nuevas interfaces
 import { VentasMensuales} from 'src/app//models/ventas-mensuales.models';
+import { map,switchMap } from 'rxjs/operators';
+import { User } from '../models/user.models';
+
+interface VendedorVentas extends User {
+  ventasDiarias?: number;
+  ventasSemanales?: number;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirestoreService {
+  getVentasMensuales(): Observable<VentasMensuales[]> {
+    return this.firestore
+      .collection<VentasMensuales>('VentasMensuales', (ref) => ref.orderBy('fechaInicio', 'desc'))
+      .valueChanges()
+      .pipe(
+        map((ventas) =>
+          ventas.map((venta) => ({
+            ...venta,
+            fechaInicio: (venta.fechaInicio as any).toDate(),
+            fechaFin: (venta.fechaFin as any).toDate(),
+            fechaActualizacion: (venta.fechaActualizacion as any).toDate(),
+          }))
+        )
+      );
+  }
+
   constructor(private firestore: AngularFirestore) {}
+
 
   async actualizarVentasMensuales(venta: Venta): Promise<void> {
     try {
@@ -79,6 +103,8 @@ export class FirestoreService {
           fecha: new Date(),
         });
       }
+
+
 
       // 2. Actualizar el total semanal
       const fecha = new Date();
@@ -150,5 +176,53 @@ export class FirestoreService {
     fin.setDate(fecha.getDate() - fecha.getDay() + 6);
     fin.setHours(23, 59, 59, 999);
     return fin;
+  }
+
+
+  getVendedoresConVentas(): Observable<VendedorVentas[]> {
+    return this.firestore
+      .collection<User>('users', (ref) => ref.where('role', '==', 'Vendedor'))
+      .valueChanges()
+      .pipe(
+        switchMap((vendedores) => {
+          // Creamos un observable que combina las ventas diarias y semanales para cada vendedor
+          const vendedoresConVentas$ = vendedores.map((vendedor) => {
+            return combineLatest([
+              this.getVentasDiarias(vendedor.uid),
+              this.getVentasSemanales(vendedor.uid),
+            ]).pipe(
+              map(([ventasDiarias, ventasSemanales]) => ({
+                ...vendedor, // Incluimos la información del vendedor
+                ventasDiarias: ventasDiarias?.Monto || 0, // Calculamos ventas diarias
+                ventasSemanales: ventasSemanales[0]?.Monto || 0, // Calculamos ventas semanales
+              }))
+            );
+          });
+
+          // Usamos combineLatest para combinar todos los observables de los vendedores
+          return combineLatest(vendedoresConVentas$);
+        })
+      );
+  }
+
+  getVentasDiarias(userId: string): Observable<Venta | null> {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    return this.firestore
+      .collection<Venta>(`users/${userId}/Ventas`, (ref) =>
+        ref.where('fecha', '>=', today)
+      )
+      .valueChanges()
+      .pipe(
+        map((ventas) => {
+          if (ventas.length === 0) return null;
+          const totalDiario = ventas.reduce((sum, venta) => sum + venta.Monto, 0);
+          return {
+            Monto: totalDiario,
+            fecha: today,
+          };
+        })
+      );
   }
 }

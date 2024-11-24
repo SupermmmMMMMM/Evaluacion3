@@ -1,55 +1,54 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Registro de Usuario</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="ion-padding">
-  <form [formGroup]="inicioForm" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input formControlName="nombre" type="text"></ion-input>
-    </ion-item>
-    <ion-note color="danger" *ngIf="inicioForm.get('nombre')?.touched && inicioForm.get('nombre')?.errors?.['required']">
-      El nombre es requerido
-    </ion-note>
+  <div class="auth-container">
+    <div class="logo-container">
+      <img src="assets/logo-almacen.png" alt="Almacén Daniella">
+    </div>
 
-    <ion-item>
-      <ion-label position="floating">Correo electrónico</ion-label>
-      <ion-input formControlName="email" type="email"></ion-input>
-    </ion-item>
-    <ion-note color="danger" *ngIf="inicioForm.get('email')?.touched && inicioForm.get('email')?.errors?.['required']">
-      El correo es requerido
-    </ion-note>
-    <ion-note color="danger" *ngIf="inicioForm.get('email')?.touched && inicioForm.get('email')?.errors?.['email']">
-      El correo no es válido
-    </ion-note>
+    <div class="auth-card">
+      <h2>Registro de Usuario</h2>
+      
+      <form [formGroup]="inicioForm" (ngSubmit)="onSubmit()">
+        <div class="form-field">
+          <label>Nombre</label>
+          <input type="text" formControlName="nombre" placeholder="Ingresa tu nombre">
+          <div class="error-message" *ngIf="inicioForm.get('nombre')?.touched && inicioForm.get('nombre')?.errors?.['required']">
+            El nombre es requerido
+          </div>
+        </div>
 
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input formControlName="password" type="password"></ion-input>
-    </ion-item>
-    <ion-note color="danger" *ngIf="inicioForm.get('password')?.touched && inicioForm.get('password')?.errors?.['required']">
-      La contraseña es requerida
-    </ion-note>
-    <ion-note color="danger" *ngIf="inicioForm.get('password')?.touched && inicioForm.get('password')?.errors?.['minlength']">
-      La contraseña debe tener al menos 6 caracteres
-    </ion-note>
+        <div class="form-field">
+          <label>Correo electrónico</label>
+          <input type="email" formControlName="email" placeholder="ejemplo@correo.com">
+          <div class="error-message" *ngIf="inicioForm.get('email')?.touched && inicioForm.get('email')?.errors?.['required']">
+            El correo es requerido
+          </div>
+        </div>
 
-    <ion-item>
-      <ion-label position="floating">Rol</ion-label>
-      <ion-select formControlName="role">
-        <ion-select-option value="Vendedor">Vendedor</ion-select-option>
-        <ion-select-option value="Administrador">Administrador</ion-select-option>
-      </ion-select>
-    </ion-item>
+        <div class="form-field">
+          <label>Contraseña</label>
+          <input type="password" formControlName="password" placeholder="********">
+          <div class="error-message" *ngIf="inicioForm.get('password')?.touched && inicioForm.get('password')?.errors?.['required']">
+            La contraseña es requerida
+          </div>
+        </div>
 
-    <ion-button expand="block" type="submit" [disabled]="!inicioForm.valid" class="ion-margin-top">
-      Registrarse
-    </ion-button>
+        <div class="form-field">
+          <label>Rol</label>
+          <select formControlName="role">
+            <option value="" disabled selected>Selecciona un rol</option>
+            <option value="Vendedor">Vendedor</option>
+            <option value="Administrador">Administrador</option>
+          </select>
+        </div>
 
-    <ion-button expand="block" fill="clear" routerLink="/login">
-      ¿Ya tienes cuenta? Inicia sesión
-    </ion-button>
-  </form>
+        <button type="submit" class="primary-button" [disabled]="!inicioForm.valid">
+          REGISTRARSE
+        </button>
+
+        <button type="button" class="secondary-button" routerLink="/login">
+          ¿Ya tienes cuenta? Inicia sesión
+        </button>
+      </form>
+    </div>
+  </div>
 </ion-content>

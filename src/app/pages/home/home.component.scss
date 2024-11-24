@@ -1,0 +1,138 @@
+// Variables
+$primary-blue: #002855;
+$secondary-blue: #003875;
+$light-blue: #1E90FF;
+$white: #ffffff;
+$transparent-white: rgba(255, 255, 255, 0.95);
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+ion-content {
+  --background: #{$primary-blue};
+  background: linear-gradient(135deg, $primary-blue, $secondary-blue);
+}
+
+.auth-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  
+  .logo-container {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 20px;
+    padding: 30px 20px;
+    
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+  
+  .auth-card {
+    width: 100%;
+    max-width: 400px;
+    background: $transparent-white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    
+    h2 {
+      color: $primary-blue;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+}
+
+.form-field {
+  margin-bottom: 20px;
+  
+  label {
+    display: block;
+    color: $primary-blue;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(0, 40, 85, 0.2);
+    border-radius: 10px;
+    font-size: 16px;
+    color: $primary-blue;
+    background: rgba(255, 255, 255, 0.7);
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-blue;
+      background: rgba(255, 255, 255, 0.9);
+    }
+  }
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.primary-button {
+  width: 100%;
+  padding: 14px;
+  background: $primary-blue;
+  color: $white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 15px;
+  height: 48px;
+  
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.secondary-button {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  color: $primary-blue;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+@media (max-width: 480px) {
+  .auth-container {
+    .logo-container {
+      max-width: 240px;
+      padding: 20px;
+    }
+    
+    .auth-card {
+      padding: 20px;
+      
+      h2 {
+        font-size: 20px;
+      }
+    }
+  }
+}

@@ -1,25 +1,63 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Vendedor</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/perfil"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="ventaForm" (ngSubmit)="registrarVenta()">
-    <ion-item>
-      <ion-label position="floating">Monto de la venta</ion-label>
-      <ion-input type="number" formControlName="monto" required></ion-input>
-    </ion-item>
-
-    <div *ngIf="ventaForm.controls['monto'].invalid && ventaForm.controls['monto'].touched">
-      <ion-text color="danger">
-        <p>El monto es obligatorio y debe ser mayor a 0.</p>
-      </ion-text>
+  <div class="sales-container">
+    <div class="sales-icon">
+      <ion-icon name="cash-outline"></ion-icon>
     </div>
 
-    <ion-button expand="full" type="submit" [disabled]="ventaForm.invalid">
-      Ingresar venta
-    </ion-button>
-  </form>
+    <ion-card class="total-sales-card">
+      <ion-card-header>
+        <ion-card-title>Total Ventas Diarias</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <h2>$ {{totalVentasDiarias}}</h2>
+      </ion-card-content>
+    </ion-card>
 
+    <form [formGroup]="ventaForm" (ngSubmit)="registrarVenta()">
+      <ion-item>
+        <ion-label position="stacked">Monto de la venta</ion-label>
+        <ion-input type="number" formControlName="monto" required></ion-input>
+      </ion-item>
+
+      <div *ngIf="ventaForm.controls['monto'].invalid && ventaForm.controls['monto'].touched">
+        <ion-text color="danger">
+          <p>El monto es obligatorio y debe ser mayor a 0.</p>
+        </ion-text>
+      </div>
+
+      <ion-button expand="full" type="submit" [disabled]="ventaForm.invalid">
+        Ingresar venta
+      </ion-button>
+    </form>
+
+    <ion-button expand="full" (click)="toggleDevolucion()" color="warning">
+      {{mostrarDevolucion ? 'Cancelar Devolución' : 'Realizar Devolución'}}
+    </ion-button>
+
+    <form *ngIf="mostrarDevolucion" [formGroup]="devolucionForm" (ngSubmit)="registrarDevolucion()">
+      <ion-item>
+        <ion-label position="stacked">Monto a devolver</ion-label>
+        <ion-input type="number" formControlName="monto" required></ion-input>
+      </ion-item>
+
+      <div *ngIf="devolucionForm.controls['monto'].invalid && devolucionForm.controls['monto'].touched">
+        <ion-text color="danger">
+          <p>El monto es obligatorio y debe ser mayor a 0.</p>
+        </ion-text>
+      </div>
+
+      <ion-button expand="full" type="submit" [disabled]="devolucionForm.invalid" color="danger">
+        Confirmar Devolución
+      </ion-button>
+    </form>
+  </div>
 </ion-content>

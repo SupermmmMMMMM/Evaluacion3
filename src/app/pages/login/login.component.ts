@@ -39,13 +39,7 @@ export class LoginComponent {
         // Una vez logueado, obtenemos el rol del usuario
         this.authService.getUserRole().subscribe(async (role) => {
           await loading.dismiss();  // Desactiva el cargador
-
-          // Redirigir dependiendo del rol
-          if (role === 'Vendedor') {
-            this.router.navigate(['/vendedor']);  // Redirige al componente Vendedor
-          } else {
-            this.router.navigate(['/login']);  // Redirige al componente de inicio si no es vendedor
-          }
+            this.router.navigate(['/perfil']);
         });
 
       } catch (error: any) {
