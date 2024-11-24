@@ -1,33 +1,35 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Iniciar sesión</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="ion-padding">
-  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-    <ion-item>
-      <ion-label position="floating">Correo electrónico</ion-label>
-      <ion-input formControlName="email" type="email"></ion-input>
-    </ion-item>
-    <ion-note color="danger" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['required']">
-      El correo es requerido
-    </ion-note>
+  <div class="login-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="logo-login">
+        <img src="assets/logo-almacen.png" alt="Almacén Daniella">
+      </div>
 
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input formControlName="password" type="password"></ion-input>
-    </ion-item>
-    <ion-note color="danger" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']">
-      La contraseña es requerida
-    </ion-note>
+      <h1>Iniciar sesión</h1>
+      
+      <ion-item>
+        <ion-label position="floating">Correo electrónico</ion-label>
+        <ion-input formControlName="email" type="email" placeholder="ejemplo@correo.com"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['required']">
+        El correo es requerido
+      </ion-note>
 
-    <ion-button expand="block" type="submit" [disabled]="!loginForm.valid" class="ion-margin-top">
-      Iniciar sesión
-    </ion-button>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input formControlName="password" type="password" placeholder="********"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']">
+        La contraseña es requerida
+      </ion-note>
 
-    <ion-button expand="block" fill="clear" routerLink="/auth/registro">
-      ¿No tienes cuenta? Regístrate
-    </ion-button>
-  </form>
+      <ion-button expand="block" type="submit" [disabled]="!loginForm.valid">
+        Iniciar sesión
+      </ion-button>
+
+      <ion-button expand="block" fill="clear" routerLink="/home">
+        ¿No tienes cuenta? Regístrate
+      </ion-button>
+    </form>
+  </div>
 </ion-content>

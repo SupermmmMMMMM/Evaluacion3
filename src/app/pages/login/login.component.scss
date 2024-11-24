@@ -1,0 +1,92 @@
+// Variables
+$primary-blue: #002855;
+$secondary-blue: #003875;
+$light-blue: #1E90FF;
+$white: #ffffff;
+$transparent-white: rgba(255, 255, 255, 0.95);
+
+ion-content {
+  --background: #{$primary-blue};
+  background: linear-gradient(135deg, $primary-blue, $secondary-blue);
+  
+  .login-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    
+    .logo-login {
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 0;
+      padding: 30px 20px;
+      
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+    }
+    
+    form {
+      width: 100%;
+      max-width: 400px;
+      background: $transparent-white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      
+      h1 {
+        color: $primary-blue;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 24px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: #{$primary-blue};
+  margin-bottom: 20px;
+  border-radius: 10px;
+  --highlight-height: 2px;
+  
+  &::part(native) {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+  }
+  
+  ion-label {
+    --color: #{$primary-blue};
+    font-weight: 500;
+  }
+  
+  ion-input {
+    --color: #{$primary-blue};
+    --placeholder-color: rgba(0, 40, 85, 0.6);
+    font-size: 1rem;
+  }
+}
+
+ion-button {
+  --background: #{$primary-blue};
+  --background-hover: #{$secondary-blue};
+  --color: #{$white};
+  margin-top: 20px;
+  height: 48px;
+  font-weight: 600;
+  text-transform: uppercase;
+  --border-radius: 10px;
+  
+  &[fill="clear"] {
+    --color: #{$white};
+    font-weight: 500;
+    text-transform: none;
+    margin-top: 15px;
+  }
+}

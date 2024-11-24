@@ -1,0 +1,96 @@
+:host {
+    --background-transparency: rgba(255, 255, 255, 0.95);
+    --border-radius: 12px;
+    --padding-container: 20px;
+  }
+  
+  ion-content {
+    --background: var(--ion-color-primary);
+    
+    &::part(scroll) {
+      padding: 20px;
+    }
+  }
+  
+  .profile-container {
+    background: var(--background-transparency);
+    border-radius: var(--border-radius);
+    padding: var(--padding-container);
+    margin: 20px auto;
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  // Nuevo código para el ícono de perfil
+  .profile-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--ion-color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -60px auto 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    ion-icon {
+      font-size: 40px;
+      color: white;
+    }
+  }
+  
+  form {
+    width: 100%;
+  }
+  
+  ion-item {
+    --background: transparent;
+    --border-color: var(--ion-color-primary);
+    --border-radius: 4px;
+    --padding-start: 0;
+    margin-bottom: 16px;
+  
+    &:last-child {
+      margin-bottom: 0;
+    }
+  
+    ion-label {
+      color: var(--ion-color-primary);
+      font-weight: 500;
+    }
+  
+    ion-input {
+      --padding-start: 8px;
+      --background: rgba(255, 255, 255, 0.5);
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+  }
+  
+  ion-note {
+    color: var(--ion-color-danger);
+    font-size: 0.8rem;
+    margin: -12px 0 16px 0;
+    display: block;
+    padding-left: 16px;
+  }
+  
+  ion-button {
+    margin: 24px 0 0 0;
+    --border-radius: 6px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  @media (max-width: 576px) {
+    ion-content::part(scroll) {
+      padding: 16px;
+    }
+  
+    .profile-container {
+      margin: 40px 10px 10px;
+      padding: 16px;
+    }
+  }

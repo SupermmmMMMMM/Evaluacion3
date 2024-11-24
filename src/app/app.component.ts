@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { initializeApp } from '@angular/fire/app';
+import { initializeApp } from 'firebase/app';
 import { environment } from '../environments/environment';
 
 @Component({
