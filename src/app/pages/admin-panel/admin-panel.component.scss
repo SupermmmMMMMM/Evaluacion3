@@ -181,4 +181,31 @@
   
   ion-content {
     --background: var(--ion-color-primary);
+  }.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff; /* Texto blanco */
+    background-color: #dc3545; /* Rojo peligro */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn:hover {
+    background-color: #c82333; /* Más oscuro al pasar el ratón */
+    transform: scale(1.05); /* Efecto de zoom */
+  }
+  
+  .btn:active {
+    background-color: #a71d2a; /* Aún más oscuro al hacer clic */
+    transform: scale(1); /* Regresa al tamaño original */
+  }
+  
+  .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5); /* Resalte con rojo claro */
   }
