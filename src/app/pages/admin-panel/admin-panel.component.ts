@@ -54,6 +54,20 @@ this.firestoreService.getVentasMensuales().subscribe({
     );
   }
 
+
+  eliminarUsuario(vendedor: VendedorVentas) {
+    if (confirm(`¿Estás seguro de que deseas eliminar al usuario ${vendedor.nombre}?`)) {
+      this.firestoreService.deleteUser(vendedor.uid)
+        .then(() => {
+          // Filtra el usuario eliminado de la lista local
+          this.vendedores = this.vendedores.filter(v => v.uid !== vendedor.uid);
+          console.log(`Usuario ${vendedor.nombre} eliminado con éxito.`);
+        })
+        .catch(error => {
+          console.error('Error al eliminar usuario:', error);
+        });
+      }}
+
   toggleVendedor(vendedor: VendedorVentas) {
     vendedor.expanded = !vendedor.expanded;
   }

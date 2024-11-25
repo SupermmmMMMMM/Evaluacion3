@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   {
     path: 'home',
@@ -12,24 +12,28 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginModule)
   },{
     path: 'vendedor',
-    loadChildren: () => import('./pages/vendedor/vendedor.module').then( m => m.VendedorModule)
+    loadChildren: () => import('./pages/vendedor/vendedor.module').then( m => m.VendedorModule),
+    canActivate: [AuthGuard]
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
     path: 'perfil',
-    loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilModule)
+    loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'admin-panel',
-    loadChildren: () => import('./pages/admin-panel/admin-panel.module').then( m => m.AdminModule)
+    loadChildren: () => import('./pages/admin-panel/admin-panel.module').then( m => m.AdminModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'modificar',
-    loadChildren: () => import('./pages/modificar/modificar.module').then( m => m.ModificarModule)
+    loadChildren: () => import('./pages/modificar/modificar.module').then( m => m.ModificarModule),
+    canActivate: [AuthGuard]
   },
 
 ];

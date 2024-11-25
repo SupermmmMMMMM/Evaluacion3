@@ -69,6 +69,10 @@
                   <p>Email: {{ vendedor.email }}</p>
                   <p>Ventas diarias: ${{ vendedor.ventasDiarias | number:'1.0-0' }}</p>
                   <p>Ventas semanales: ${{ vendedor.ventasSemanales | number:'1.0-0' }}</p>
+
+                  <button (click)="eliminarUsuario(vendedor)" class="btn btn-danger">
+                    Eliminar Usuario
+                  </button>
                 </ion-label>
               </ion-col>
             </ion-row>

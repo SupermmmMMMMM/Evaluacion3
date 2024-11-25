@@ -141,6 +141,12 @@ export class FirestoreService {
     }
   }
 
+  deleteUser(uid: string): Promise<void> {
+    return this.firestore.collection('users').doc(uid).delete();
+  }
+  
+
+
   // Obtener el total general
   getTotalVentas(usuarioId: string): Observable<Venta> {
     return this.firestore

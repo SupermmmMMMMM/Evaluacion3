@@ -116,7 +116,7 @@ import { User } from 'src/app/models/user.models';
 
   .logo {
     height: 40px;
-    width: auto;
+   
     object-fit: contain;
   }
 
@@ -130,7 +130,7 @@ import { User } from 'src/app/models/user.models';
     }
     
     .logo {
-      height: 30px;
+      height: 3rem;
     }
   }
   
@@ -147,11 +147,7 @@ import { User } from 'src/app/models/user.models';
       margin-right: 5px;
     }
   
-    @media (max-width: 768px) {
-      .logo {
-        height: 25px;
-      }
-    }
+   
   
     // Estilos para el menú lateral
     ion-menu ion-content {
