@@ -35,6 +35,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/modificar/modificar.module').then( m => m.ModificarModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'recuperar-contrasena',
+    loadChildren: () => import('./pages/recuperar-contrasena/recuperar-contrasena.module').then( m => m.RecuperarContrasenaModule)
+  },
 
 ];
 

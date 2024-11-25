@@ -1,0 +1,31 @@
+<ion-content class="ion-padding">
+  <div class="recover-container">
+    <form [formGroup]="recoverForm" (ngSubmit)="onRecover()">
+      <div class="logo-login">
+        <img src="assets/logo-almacen.png" alt="Almacén Daniella">
+      </div>
+
+      <h1>Recuperar contraseña</h1>
+      
+      <ion-item>
+        <ion-label position="floating">Correo electrónico</ion-label>
+        <ion-input formControlName="email" type="email" placeholder="ejemplo@correo.com"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="recoverForm.get('email')?.touched && recoverForm.get('email')?.errors?.['required']">
+        El correo es requerido
+      </ion-note>
+      <ion-note color="danger" *ngIf="recoverForm.get('email')?.touched && recoverForm.get('email')?.errors?.['email']">
+        El correo no es válido
+      </ion-note>
+
+      <ion-button expand="block" type="submit" [disabled]="!recoverForm.valid">
+        Enviar correo de recuperación
+      </ion-button>
+
+      <button type="button" class="secondary-button" routerLink="/login">
+        Volver al inicio de sesión
+      </button>
+
+    </form>
+  </div>
+</ion-content>

@@ -40,7 +40,7 @@ export class HomeComponent {
         const { email, password, nombre, role } = this.inicioForm.value;
         await this.authService.register(email, password, { nombre, role });
         await loading.dismiss();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/perfil']);
       } catch (error: any) {
         await loading.dismiss();
         const alert = await this.alertController.create({

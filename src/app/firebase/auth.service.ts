@@ -86,6 +86,13 @@ export class AuthService {
     }
   }
 
+  async resetPassword(email: string): Promise<void> {
+    try {
+      await this.afAuth.sendPasswordResetEmail(email);
+    } catch (error: any) {
+      throw this.handleError(error);
+    }
+  }
   // Método para obtener el ID del usuario actual
   async getUserId(): Promise<string | null> {
     const user = await this.afAuth.currentUser;
