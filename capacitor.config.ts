@@ -2,8 +2,9 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'Evaluacion3',
-  webDir: 'www'
+  appName: 'Almacen-Daniella',
+  webDir: 'www',
+  bundledWebRuntime: false
 };
 
 export default config;
